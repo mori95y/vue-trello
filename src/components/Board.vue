@@ -6,7 +6,7 @@
         <main>
             <p class="info-line">All: {{ totalCardCount }} tasks</p>
             <div class="list-index">
-                <list v-for="(item, index) in lists" :key="item.id" :title="item.title" :cards="item.cards" :listIndex="index" />
+                <list v-for="(item, index) in lists" :key="item.id" :title="item.title" :cards="item.cards" :listIndex="index" @change="movingCard" />
                 <list-add />
             </div>
         </main>
@@ -31,5 +31,10 @@ export default {
             return this.$store.getters.totalCardCount
         }
     },
+    methods: {
+        movingCard: function() {
+            this.$store.dispatch('updateList', { lists: this.lists })
+        },
+    }
 }
 </script>
